@@ -19,3 +19,6 @@ build-backend = "pdm.backend"
 
 [tool.pdm]
 distribution = true
+
+[project.scripts]
+fix-imports = "fix_imports.commandline.cli:cli"

@@ -3,9 +3,10 @@ import click
 
 @click.command()
 @click.argument("filename")
-def echo_file(filename):
+def echo_file(filename) -> str:
     click.echo(filename)
+    return filename
 
 
-if __name__ == "__main__":
+def cli():
     echo_file()
