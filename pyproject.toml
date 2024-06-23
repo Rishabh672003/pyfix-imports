@@ -1,0 +1,21 @@
+[project]
+name = "fix-imports"
+version = "0.1.0"
+description = "python tool and library that will fix your imports"
+authors = [
+    {name = "Rishabh", email = "jharishabh672003@gmail.com"},
+]
+dependencies = [
+    "click>=8.1.7",
+]
+requires-python = ">=3.12"
+readme = "README.md"
+license = {text = "GPL-3.0-only"}
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[tool.pdm]
+distribution = true
