@@ -1,4 +1,4 @@
-from fix_imports.commandline.cli import echo_file
+from fix_imports.commandline.cli import cli
 
 if __name__ == "__main__":
-    echo_file()
+    cli()

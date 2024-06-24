@@ -10,4 +10,4 @@ build:
 	pdm build
 
 run:
-	python -m $(project) /home/rishabh/projects/PYTHON-ML/test.py
+	python -m $(project) /home/rishabh/projects/PYTHON-ML/numpy/test.py
