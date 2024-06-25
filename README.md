@@ -13,6 +13,8 @@ Just run `pip install py-fix-imports`
 
 ## Usage
 
+Note: The executable is named `fix-imports`, which is different from the project name
+
 Just running `fix-imports <FILENAME>` will just print the fixed code to the stdout.
 If you want to update the file in-place use the -f/--fix option `fix-imports -c <FILENAME>`
 
