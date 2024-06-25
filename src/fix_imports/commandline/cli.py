@@ -3,6 +3,7 @@ import click
 from fix_imports.file import file_handling
 from fix_imports.flake import flake
 from fix_imports.package import packages
+from fix_imports.pyflake import pyflake
 
 
 @click.command()

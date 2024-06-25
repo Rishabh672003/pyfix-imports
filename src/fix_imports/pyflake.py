@@ -1,6 +1,5 @@
 import re
-from collections import defaultdict
-from typing import Any, DefaultDict, Iterable, List
+from typing import Any, Iterable, Set
 
 import pyflakes.api
 import pyflakes.messages
@@ -42,20 +41,20 @@ def check(source: str) -> Iterable[pyflakes.messages.Message]:
 
 def undefined_name(
     messages: Iterable[pyflakes.messages.Message],
-) -> DefaultDict[str, List[str]]:
-    """Yield line number and module name of unused imports."""
+) -> Set[str]:
+    """Return undefined names."""
     pattern = re.compile(r"\'(.+?)\'")
-    module_dict = defaultdict(list)
+    module_set = set()
     for message in messages:
         if isinstance(message, pyflakes.messages.UndefinedName):
             module_name = pattern.search(str(message))
             if module_name:
                 module_name = module_name.group()[1:-1]
-                module_dict[message.lineno].append(module_name)
-    return module_dict
+                module_set.add(module_name)
+    return module_set
 
 
-def flake(src: str) -> DefaultDict[str, List[str]]:
+def pyflake(src: str) -> Set[str]:
     flake_message = check(src)
     modules = undefined_name(flake_message)
     return modules
