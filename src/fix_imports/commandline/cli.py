@@ -1,21 +1,32 @@
 import click
 
-from fix_imports.file import file_handling
-from fix_imports.pyflake import pyflake
+from fix_imports.file import get_file_text, write_to_file
 from fix_imports.package import import_string
+from fix_imports.pyflake import pyflake
 
 
 @click.command()
+@click.option(
+    "-f", "--fix", is_flag=True, default=False, help="format the file in place"
+)
 @click.argument("filename")
-def cli(filename: str) -> str | None:
-    output = file_handling(filename)
+def cli(filename: str, fix: bool) -> str | None:
+    output = get_file_text(filename)
     mod_list = pyflake(output)
     imports = import_string(mod_list)
 
-    if imports:
-        click.echo(imports + 2*"\n" + output, nl=True)
+    if not fix:
+        if imports:
+            click.echo(imports + 2 * "\n" + output, nl=True)
+        else:
+            click.echo(output, nl=True)
     else:
-        click.echo(output, nl=True)
+        if imports:
+            write_to_file(filename, imports + 2 * "\n" + output)
+            click.echo("Written to file successfully")
+        else:
+            click.echo("Nothing to do")
+            pass
 
     return imports + "\n" + output + "\n"
 
