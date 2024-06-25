@@ -9,6 +9,18 @@ I mostly wrote this to learn more about python, and wanted to make something wit
 2. Do `cd fix-imports`
 3. Run `pipx install .`
 
+## Configuration
+
+The default configuration file should be placed in `$XDG_CONFIG_HOME/fix-imports/config.toml`
+or you can place your config file anywhere and just provide the path to the command `fix-imports -c <Path>`
+the structure should be like this
+
+```toml
+"tf" = "import tensorflow as tf"
+"plt" = "import matplotlib.pyplot as plt"
+"isprime" = "from sympy import isprime"
+```
+
 ## How I use it
 
 As they say necessity is the mother of invention, also python language server like, pyright and pylsp don't do that good
@@ -27,3 +39,17 @@ require("conform").setup({
         },
     })
 ```
+
+## References
+
+I took many projects for reference/code
+
+- [autoimport](https://lyz-code.github.io/autoimport/) I could have just used this, but I wanted to make something so
+  took it as a reference and made this. I didn't took that much code from it, but yes as someone who has never made a
+  decent size python project it was really helpful
+- [autoflake](https://pypi.org/project/autoflake/) I wanted to use pyflakes to get the errors in code, and this one had
+  great implementation of pyflake api.
+- [pyflakes](https://pypi.org/project/pyflakes/) Used this to get all the errors for undefined names.
+- [click](https://click.palletsprojects.com/en/8.1.x/) Used this to make the command-line interface
+- [pdm](https://github.com/pdm-project/pdm) Used this to structure and manage dependency for the project
+- [xdg-base-dirs](https://github.com/srstevenson/xdg-base-dirs) Used this to get the config file
