@@ -5,7 +5,7 @@
 groups = ["default"]
 strategy = ["cross_platform", "inherit_metadata"]
 lock_version = "4.4.1"
-content_hash = "sha256:3b570c03ce5c7d55424c3fdd92e5c42b845f7b6c105a2db74c97807353dd545d"
+content_hash = "sha256:8370645052d0df22651203276f05313a3e76c93e8e202993007ffacd5e8657cb"
 
 [[package]]
 name = "click"
@@ -51,4 +51,15 @@ groups = ["default"]
 files = [
     {file = "pyflakes-3.2.0-py2.py3-none-any.whl", hash = "sha256:84b5be138a2dfbb40689ca07e2152deb896a65c3a3e24c251c5c62489568074a"},
     {file = "pyflakes-3.2.0.tar.gz", hash = "sha256:1c61603ff154621fb2a9172037d84dca3500def8c8b630657d1701f026f8af3f"},
+]
+
+[[package]]
+name = "xdg-base-dirs"
+version = "6.0.1"
+requires_python = ">=3.10,<4.0"
+summary = "Variables defined by the XDG Base Directory Specification"
+groups = ["default"]
+files = [
+    {file = "xdg_base_dirs-6.0.1-py3-none-any.whl", hash = "sha256:63f6ebc1721ced2e86c340856e004ef829501a30a37e17079c52cfaf0e1741b9"},
+    {file = "xdg_base_dirs-6.0.1.tar.gz", hash = "sha256:b4c8f4ba72d1286018b25eea374ec6fbf4fddda3d4137edf50de95de53e195a6"},
 ]
