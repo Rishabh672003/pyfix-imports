@@ -3,6 +3,10 @@
 WIP Python library which fixes missing imports, It automatically fixes missing imports by importing them
 I mostly wrote this to learn more about python, and wanted to make something with.
 
+
+https://github.com/Rishabh672003/fix-imports/assets/53911515/941f0b59-a4d0-498f-89a4-0104a2eae92f
+
+
 ## Installation
 
 1. Clone the repository `git clone https://github.com/Rishabh672003/fix-imports.git`
