@@ -1,52 +1,39 @@
 import importlib.util
-from typing import Dict
+from typing import List
 
-from fix_imports.typing import types
-
-common_statements: Dict[str, str] = {
-    "ABC": "from abc import ABC",
-    "abstractmethod": "from abc import abstractmethod",
-    "BaseModel": "from pydantic import BaseModel  # noqa: E0611",
-    "BeautifulSoup": "from bs4 import BeautifulSoup",
-    "call": "from unittest.mock import call",
-    "CaptureFixture": "from _pytest.capture import CaptureFixture",
-    "CliRunner": "from click.testing import CliRunner",
-    "copyfile": "from shutil import copyfile",
-    "datetime": "from datetime import datetime",
-    "dedent": "from textwrap import dedent",
-    "Enum": "from enum import Enum",
-    "Faker": "from faker import Faker",
-    "FrozenDateTimeFactory": "from freezegun.api import FrozenDateTimeFactory",
-    "LocalPath": "from py._path.local import LocalPath",
-    "LogCaptureFixture": "from _pytest.logging import LogCaptureFixture",
-    "Mock": "from unittest.mock import Mock",
-    "ModelFactory": "from pydantic_factories import ModelFactory",
-    "np": "import numpy as np",
-    "Path": "from pathlib import Path",
-    "pd": "import pandas as pd",
-    "plt": "import matplotlib.pyplot as plt",
-    "patch": "from unittest.mock import patch",
-    "StringIO": "from io import StringIO",
-    "suppress": "from contextlib import suppress",
-    "tz": "from dateutil import tz",
-    "YAMLError": "from yaml import YAMLError",
-}
+from fix_imports.predefined import predefined_imports
 
 
-def packages(name) -> str:
-    types_list = types
+def collection_imports() -> List[str]:
+    from collections import __all__
+
+    return __all__
+
+
+def typing() -> List[str]:
+    from typing import __all__
+
+    return __all__
+
+
+def packages(name) -> str | None:
+    types_list = typing()
+    collection_list = collection_imports()
 
     if name in types_list:
         return f"from typing import {name}"
 
-    if name in common_statements:
-        return common_statements[name]
+    if name in predefined_imports:
+        return predefined_imports[name]
+
+    if name in collection_list:
+        return f"from collections import {name}"
 
     package_specs = importlib.util.find_spec(name)
 
     try:
         importlib.util.module_from_spec(package_specs)  # type: ignore
-    except AttributeError:
-        return ""
+    except Exception:
+        return None
 
     return f"import {name}"

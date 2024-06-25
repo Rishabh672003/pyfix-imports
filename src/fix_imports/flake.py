@@ -6,10 +6,6 @@ import pyflakes.api
 import pyflakes.messages
 import pyflakes.reporter
 
-"""
-code taken from the autoflake
-"""
-
 
 class StubFile:
     """Stub out file for pyflakes."""
@@ -42,19 +38,6 @@ def check(source: str) -> Iterable[pyflakes.messages.Message]:
     except (AttributeError, RecursionError, UnicodeDecodeError):
         pass
     return reporter.messages
-
-
-def unused_import_module_name(
-    messages: Iterable[pyflakes.messages.Message],
-) -> Iterable[tuple[int, str]]:
-    """Yield line number and module name of unused imports."""
-    pattern = re.compile(r"\'(.+?)\'")
-    for message in messages:
-        if isinstance(message, pyflakes.messages.UnusedImport):
-            module_name = pattern.search(str(message))
-            if module_name:
-                module_name = module_name.group()[1:-1]
-                yield (message.lineno, module_name)
 
 
 def undefined_name(
