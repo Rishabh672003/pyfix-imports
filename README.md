@@ -9,9 +9,12 @@ https://github.com/Rishabh672003/fix-imports/assets/53911515/941f0b59-a4d0-498f-
 
 ## Installation
 
-1. Clone the repository `git clone https://github.com/Rishabh672003/fix-imports.git`
-2. Do `cd fix-imports`
-3. Run `pipx install .`
+Just run `pip install py-fix-imports`
+
+## Usage
+
+Just running `fix-imports <FILENAME>` will just print the fixed code to the stdout.
+If you want to update the file in-place use the -f/--fix option `fix-imports -c <FILENAME>`
 
 ## Configuration
 

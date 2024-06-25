@@ -1,5 +1,5 @@
 [project]
-name = "fix-imports"
+name = "py-fix-imports"
 version = "0.1.0"
 description = "python tool and library that will fix your imports"
 authors = [
