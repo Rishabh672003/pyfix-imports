@@ -3,9 +3,7 @@
 WIP Python library which fixes missing imports, It automatically fixes missing imports by importing them
 I mostly wrote this to learn more about python, and wanted to make something with.
 
-
 https://github.com/Rishabh672003/fix-imports/assets/53911515/941f0b59-a4d0-498f-89a4-0104a2eae92f
-
 
 ## Installation
 
@@ -15,6 +13,8 @@ Just run `pip install pyfix-imports`
 
 Just running `pyfix-imports <FILENAME>` will just print the fixed code to the stdout.
 If you want to update the file in-place use the -f/--fix option `pyfix-imports -c <FILENAME>`
+
+I recommend after running the program use [isort](https://pycqa.github.io/isort/) to sort the imports.
 
 ## Configuration
 
