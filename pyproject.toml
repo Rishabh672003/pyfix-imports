@@ -1,6 +1,6 @@
 [project]
 name = "pyfix-imports"
-version = "0.1.0"
+version = "0.1.1"
 description = "python tool that will fix your missing imports"
 authors = [
     {name = "Rishabh", email = "jharishabh672003@gmail.com"},
@@ -23,4 +23,4 @@ build-backend = "pdm.backend"
 distribution = true
 
 [project.scripts]
-fix-imports = "pyfix_imports.commandline.cli:cli"
+pyfix-imports = "pyfix_imports.commandline.cli:cli"
