@@ -4,16 +4,16 @@ from typing import List, Set
 from pyfix_imports.predefined import predefined_imports
 
 
-def collection_imports() -> List[str]:
+def collection_imports() -> Set[str]:
     from collections import __all__
 
-    return __all__
+    return set(__all__)
 
 
-def typing() -> List[str]:
+def typing() -> Set[str]:
     from typing import __all__
 
-    return __all__
+    return set(__all__)
 
 
 def is_package(name: str) -> str | None:
@@ -27,8 +27,8 @@ def is_package(name: str) -> str | None:
 
 
 def import_string(mod_set: Set[str]) -> str:
-    typings = set(typing())
-    collections = set(collection_imports())
+    typings = typing()
+    collections = collection_imports()
     predefined_keys = set(predefined_imports.keys())
 
     typings_imports = []
