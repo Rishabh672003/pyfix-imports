@@ -1,7 +1,6 @@
 import click
 
-from fix_imports.config import (config_parse, get_config_path,
-                                update_pred_imports)
+from fix_imports.config import config
 from fix_imports.file import get_file_text, write_to_file
 from fix_imports.package import import_string
 from fix_imports.pyflake import pyflake
@@ -20,13 +19,7 @@ from fix_imports.pyflake import pyflake
 )
 @click.argument("filename")
 def cli(filename: str, fix: bool, config_file) -> str | None:
-    if config_file:
-        data = config_parse(config_file)
-        update_pred_imports(data)
-    else:
-        default_config_data = config_parse(get_config_path())
-        update_pred_imports(default_config_data)
-
+    config(config_file)
     output = get_file_text(filename)
     mod_list = pyflake(output)
     imports = import_string(mod_list)
