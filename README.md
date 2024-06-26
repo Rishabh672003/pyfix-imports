@@ -20,9 +20,10 @@ If you want to update the file in-place use the -f/--fix option `pyfix-imports -
 
 The default configuration file should be placed in `$XDG_CONFIG_HOME/pyfix-imports/config.toml`
 or you can place your config file anywhere and just provide the path to the command `fix-imports -c <Path>`
-the structure should be like this
+the structure should be like this, don't forget to include [config] on the top
 
 ```toml
+[config]
 "tf" = "import tensorflow as tf"
 "plt" = "import matplotlib.pyplot as plt"
 "isprime" = "from sympy import isprime"

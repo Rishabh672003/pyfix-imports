@@ -1,5 +1,5 @@
 import importlib.util
-from typing import List, Set
+from typing import Set
 
 from pyfix_imports.predefined import predefined_imports
 

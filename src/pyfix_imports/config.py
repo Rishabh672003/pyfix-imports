@@ -1,7 +1,7 @@
 import os
 import tomllib
 from pathlib import Path
-from typing import Any, Dict
+from typing import Dict
 
 import xdg_base_dirs
 
@@ -14,13 +14,17 @@ def get_config_path() -> Path:
     return config_path
 
 
-def config_parse(file: Path) -> Dict[str, Any] | None:
+def config_parse(file: Path) -> Dict[str, str] | Dict:
     try:
         with open(file, "rb") as f:
             data = tomllib.load(f)
-        return data
+        req_data = data["config"]
+        if req_data:
+            return req_data
+        else:
+            return {}
     except Exception:
-        pass
+        return {}
 
 
 def update_pred_imports(data: Dict[str, str]) -> None:
@@ -31,14 +35,9 @@ def update_pred_imports(data: Dict[str, str]) -> None:
 
 
 def config(given_path: Path) -> None:
-    if given_path is not None:
-        if os.path.exists(given_path):
-            data = config_parse(given_path)
-            if data:
-                update_pred_imports(data)
-    elif os.path.exists(get_config_path()):
-        default_config_data = config_parse(get_config_path())
-        if default_config_data:
-            update_pred_imports(default_config_data)
-    else:
-        pass
+    path = given_path or get_config_path()
+
+    if os.path.exists(path):
+        data = config_parse(path)
+        if data is not None:
+            update_pred_imports(data)
