@@ -1,4 +1,4 @@
-# Fix-imports
+# PyFix-Imports
 
 WIP Python library which fixes missing imports, It automatically fixes missing imports by importing them
 I mostly wrote this to learn more about python, and wanted to make something with.

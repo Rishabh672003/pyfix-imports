@@ -1,4 +1,4 @@
-project = fix_imports
+project = pyfix_imports
 mode = Debug
 
 all: install

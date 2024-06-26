@@ -1,9 +1,9 @@
 import click
 
-from fix_imports.config import config
-from fix_imports.file import get_file_text, write_to_file
-from fix_imports.package import import_string
-from fix_imports.pyflake import pyflake
+from pyfix_imports.config import config
+from pyfix_imports.file import get_file_text, write_to_file
+from pyfix_imports.package import import_string
+from pyfix_imports.pyflake import pyflake
 
 
 @click.command()

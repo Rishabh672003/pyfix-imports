@@ -5,7 +5,7 @@ import os
 
 import xdg_base_dirs
 
-from fix_imports.predefined import predefined_imports
+from pyfix_imports.predefined import predefined_imports
 
 
 def get_config_path():

@@ -1,7 +1,7 @@
 import importlib.util
 from typing import List, Set
 
-from fix_imports.predefined import predefined_imports
+from pyfix_imports.predefined import predefined_imports
 
 
 def collection_imports() -> List[str]:

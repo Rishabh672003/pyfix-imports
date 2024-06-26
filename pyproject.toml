@@ -1,7 +1,7 @@
 [project]
-name = "fix-imports"
+name = "pyfix-imports"
 version = "0.1.0"
-description = "python tool and library that will fix your imports"
+description = "python tool that will fix your missing imports"
 authors = [
     {name = "Rishabh", email = "jharishabh672003@gmail.com"},
 ]
@@ -19,9 +19,8 @@ license = {text = "GPL-3.0-only"}
 requires = ["pdm-backend"]
 build-backend = "pdm.backend"
 
-
 [tool.pdm]
 distribution = true
 
 [project.scripts]
-fix-imports = "fix_imports.commandline.cli:cli"
+fix-imports = "pyfix_imports.commandline.cli:cli"
