@@ -10,7 +10,7 @@ from pyfix_imports.predefined import predefined_imports
 
 def get_config_path():
     config_dir = xdg_base_dirs.xdg_config_home()
-    config_path = Path(config_dir) / "fix-imports" / "config.toml"
+    config_path = Path(config_dir) / "pyfix-imports" / "config.toml"
     return config_path
 
 

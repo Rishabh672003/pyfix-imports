@@ -9,18 +9,16 @@ https://github.com/Rishabh672003/fix-imports/assets/53911515/941f0b59-a4d0-498f-
 
 ## Installation
 
-Just run `pip install py-fix-imports`
+Just run `pip install pyfix-imports`
 
 ## Usage
 
-Note: The executable is named `fix-imports`, which is different from the project name
-
-Just running `fix-imports <FILENAME>` will just print the fixed code to the stdout.
-If you want to update the file in-place use the -f/--fix option `fix-imports -c <FILENAME>`
+Just running `pyfix-imports <FILENAME>` will just print the fixed code to the stdout.
+If you want to update the file in-place use the -f/--fix option `pyfix-imports -c <FILENAME>`
 
 ## Configuration
 
-The default configuration file should be placed in `$XDG_CONFIG_HOME/fix-imports/config.toml`
+The default configuration file should be placed in `$XDG_CONFIG_HOME/pyfix-imports/config.toml`
 or you can place your config file anywhere and just provide the path to the command `fix-imports -c <Path>`
 the structure should be like this
 
@@ -39,10 +37,10 @@ with [conform.nvim](https://github.com/stevearc/conform.nvim) you can also use i
 ```lua
 require("conform").setup({
     formatters_by_ft = {
-    python = { "fix_imports", "black", "isort" },
+    python = { "pyfix_imports", "black", "isort" },
     formatters = {
-        fix_imports = {
-            command = "fix-imports",
+        pyfix_imports = {
+            command = "pyfix-imports",
             args = { "$FILENAME" },
             cwd = require("conform.util").root_file({ "requirements.txt", "pyproject.toml" }),
         },
