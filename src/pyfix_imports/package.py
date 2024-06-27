@@ -10,7 +10,7 @@ def collection_imports() -> Set[str]:
     return set(__all__)
 
 
-def typing() -> Set[str]:
+def typing_imports() -> Set[str]:
     from typing import __all__
 
     return set(__all__)
@@ -27,20 +27,20 @@ def is_package(name: str) -> str | None:
 
 
 def import_string(mod_set: Set[str]) -> str:
-    typings = typing()
-    collections = collection_imports()
+    types_set = typing_imports()
+    collections_set = collection_imports()
     predefined_keys = set(predefined_imports.keys())
 
-    typings_imports = []
-    collections_imports = []
+    types = []
+    collections = []
     predefined_imports_list = []
     other_imports = []
 
     for mod in mod_set:
-        if mod in typings:
-            typings_imports.append(mod)
-        elif mod in collections:
-            collections_imports.append(mod)
+        if mod in types_set:
+            types.append(mod)
+        elif mod in collections_set:
+            collections.append(mod)
         elif mod in predefined_keys:
             predefined_imports_list.append(predefined_imports[mod])
         else:
@@ -48,13 +48,9 @@ def import_string(mod_set: Set[str]) -> str:
             if package_import:
                 other_imports.append(package_import)
 
-    typings_str = (
-        "from typing import " + ", ".join(typings_imports) if typings_imports else ""
-    )
+    typings_str = "from typing import " + ", ".join(types) if types else ""
     collections_str = (
-        "from collections import " + ", ".join(collections_imports)
-        if collections_imports
-        else ""
+        "from collections import " + ", ".join(collections) if collections else ""
     )
     predefined_str = "\n".join(predefined_imports_list)
     other_str = "\n".join(other_imports)
