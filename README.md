@@ -38,7 +38,7 @@ with [conform.nvim](https://github.com/stevearc/conform.nvim) you can also use i
 ```lua
 require("conform").setup({
     formatters_by_ft = {
-    python = { "pyfix_imports", "black", "isort" },
+    python = { "pyfix_imports", "ruff", "isort" },
     formatters = {
         pyfix_imports = {
             command = "pyfix-imports",
