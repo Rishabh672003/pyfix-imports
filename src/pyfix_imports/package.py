@@ -1,19 +1,19 @@
 import importlib.util
-from typing import Set
+from typing import FrozenSet, Set
 
 from pyfix_imports.predefined import predefined_imports
 
 
-def collection_imports() -> Set[str]:
+def collection_imports() -> FrozenSet[str]:
     from collections import __all__
 
-    return set(__all__)
+    return frozenset(__all__)
 
 
-def typing_imports() -> Set[str]:
+def typing_imports() -> FrozenSet[str]:
     from typing import __all__
 
-    return set(__all__)
+    return frozenset(__all__)
 
 
 def is_package(name: str) -> str | None:
