@@ -1,60 +1,50 @@
 import importlib.util
-from typing import FrozenSet, Set
+from typing import FrozenSet
 
 from pyfix_imports.predefined import predefined_imports
 
 
-def collection_imports() -> FrozenSet[str]:
-    from collections import __all__
-
+def get_modules_all(mod_name: str) -> FrozenSet[str]:
+    __all__ = getattr(__import__(mod_name), "__all__")
     return frozenset(__all__)
 
 
-def typing_imports() -> FrozenSet[str]:
-    from typing import __all__
-
-    return frozenset(__all__)
+def is_package(name: str) -> bool:
+    return importlib.util.find_spec(name) is not None
 
 
-def is_package(name: str) -> str | None:
-    package_specs = importlib.util.find_spec(name)
-
-    try:
-        importlib.util.module_from_spec(package_specs)  # type: ignore
-        return f"import {name}"
-    except Exception:
-        return None
-
-
-def import_string(mod_set: Set[str]) -> str:
-    types_set = typing_imports()
-    collections_set = collection_imports()
-    predefined_keys = set(predefined_imports.keys())
-
-    types = []
-    collections = []
-    predefined_imports_list = []
-    other_imports = []
+def import_string(mod_set) -> str:
+    modules_all = {
+        "predefined": predefined_imports,
+        "typing": get_modules_all("typing"),
+        "collections": get_modules_all("collections"),
+        "textwrap": get_modules_all("textwrap"),
+    }
+    imports_dict = {
+        "predefined": [],
+        "typing": [],
+        "collections": [],
+        "textwrap": [],
+        "others": [],
+    }
 
     for mod in mod_set:
-        if mod in types_set:
-            types.append(mod)
-        elif mod in collections_set:
-            collections.append(mod)
-        elif mod in predefined_keys:
-            predefined_imports_list.append(predefined_imports[mod])
-        else:
-            package_import = is_package(mod)
-            if package_import:
-                other_imports.append(package_import)
+        found = False
+        for module_type, modules in modules_all.items():
+            if mod in modules:
+                imports_dict[module_type].append(mod)
+                found = True
+                break
+        if not found and is_package(mod):
+            imports_dict["others"].append(mod)
 
-    typings_str = "from typing import " + ", ".join(types) if types else ""
-    collections_str = (
-        "from collections import " + ", ".join(collections) if collections else ""
-    )
-    predefined_str = "\n".join(predefined_imports_list)
-    other_str = "\n".join(other_imports)
+    import_statements = []
+    for module_type, modules in imports_dict.items():
+        if module_type == "predefined" and modules:
+            import_statements.extend(predefined_imports[mod] for mod in modules)
+        elif module_type == "others" and modules:
+            import_statements.extend(f"import {mod}" for mod in modules)
+        elif modules:
+            import_statements.append(f"from {module_type} import {', '.join(modules)}")
 
-    return "\n".join(
-        filter(None, [typings_str, collections_str, predefined_str, other_str])
-    )
+    return "\n".join(import_statements)

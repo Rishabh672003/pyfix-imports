@@ -10,7 +10,6 @@ predefined_imports: Dict[str, str] = {
     "CliRunner": "from click.testing import CliRunner",
     "copyfile": "from shutil import copyfile",
     "datetime": "from datetime import datetime",
-    "dedent": "from textwrap import dedent",
     "Enum": "from enum import Enum",
     "Faker": "from faker import Faker",
     "FrozenDateTimeFactory": "from freezegun.api import FrozenDateTimeFactory",
