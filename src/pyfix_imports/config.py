@@ -1,8 +1,8 @@
 import os
-import tomllib
 from pathlib import Path
 from typing import Dict
 
+import tomllib
 import xdg_base_dirs
 
 from pyfix_imports.predefined import predefined_imports
@@ -37,7 +37,7 @@ def update_pred_imports(data: Dict[str, str]) -> None:
         return None
 
 
-def config(given_path: Path) -> None:
+def config(given_path: Path | None) -> None:
     path = given_path or get_config_path()
 
     if path:

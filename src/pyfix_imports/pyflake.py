@@ -55,6 +55,7 @@ def undefined_name(
 
 
 def pyflake(src: str) -> Set[str]:
+    """Takes the filename as an argument and Returns the set of all undefined names"""
     flake_message = check(src)
     modules = undefined_name(flake_message)
     return modules

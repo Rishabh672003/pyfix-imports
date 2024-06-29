@@ -4,7 +4,7 @@ from pyfix_imports.package import import_string
 from pyfix_imports.pyflake import pyflake
 
 
-def fix_code(filename: str, config_file) -> str:
+def fix_code(filename: str, config_file = None) -> str:
     """Fix the python source code of a file.
 
     Args:
