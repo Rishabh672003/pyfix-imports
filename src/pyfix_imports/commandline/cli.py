@@ -1,9 +1,7 @@
 import click
 
-from pyfix_imports.config import config
-from pyfix_imports.file import get_file_text, write_to_file
-from pyfix_imports.package import import_string
-from pyfix_imports.pyflake import pyflake
+from pyfix_imports.file import write_to_file
+from pyfix_imports.fix_code import fix_code
 
 
 @click.command()
@@ -17,27 +15,20 @@ from pyfix_imports.pyflake import pyflake
     type=click.Path(exists=True, dir_okay=False, readable=True),
     help="path of the config file",
 )
-@click.argument("filename")
+@click.argument(
+    "filename",
+    type=click.Path(exists=True, dir_okay=False, readable=True),
+)
 def cli(filename: str, fix: bool, config_file) -> str | None:
-    config(config_file)
-    output = get_file_text(filename)
-    mod_list = pyflake(output)
-    imports = import_string(mod_list)
+    fixed_code = fix_code(filename, config_file)
 
     if not fix:
-        if imports:
-            click.echo(imports + 2 * "\n" + output, nl=True)
-        else:
-            click.echo(output, nl=True)
+        click.echo(fixed_code, nl=True)
     else:
-        if imports:
-            write_to_file(filename, imports + 2 * "\n" + output)
-            click.echo("Written to file successfully")
-        else:
-            click.echo("Nothing to do")
-            pass
+        write_to_file(filename, fixed_code)
+        click.echo("Written to file successfully")
 
-    return imports + "\n" + output + "\n"
+    return None
 
 
 if __name__ == "__main__":
