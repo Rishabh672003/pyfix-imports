@@ -5,6 +5,15 @@ from pyfix_imports.pyflake import pyflake
 
 
 def fix_code(filename: str, config_file) -> str:
+    """Fix the python source code of a file.
+
+    Args:
+        filename: path of file to be fixed.
+        config_file(Optional): path of the config file
+
+    Returns:
+        Fixed code retrieved from file.
+    """
     config(config_file)
     output = get_file_text(filename)
     mod_list = pyflake(output)
