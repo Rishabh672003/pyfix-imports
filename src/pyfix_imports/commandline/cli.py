@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import click
 
 from pyfix_imports.file import write_to_file
@@ -19,7 +21,7 @@ from pyfix_imports.fix_code import fix_code
     "filename",
     type=click.Path(exists=True, dir_okay=False, readable=True),
 )
-def cli(filename: str, fix: bool, config_file) -> str | None:
+def cli(filename: str, fix: bool, config_file: Path | None) -> str | None:
     fixed_code = fix_code(filename, config_file)
 
     if not fix:

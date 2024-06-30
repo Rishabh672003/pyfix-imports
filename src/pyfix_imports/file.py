@@ -10,10 +10,10 @@ def get_file_text(filename: str) -> str:
 
     return output.lstrip().rstrip()
 
-def write_to_file(filename:str, text: str):
+
+def write_to_file(filename: str, text: str):
     try:
         with open(filename, "w") as file:
             file.write(text)
     except Exception:
         return None
-
