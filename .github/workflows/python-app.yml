@@ -21,9 +21,7 @@ jobs:
       - name: Setup PDM
         uses: pdm-project/setup-pdm@v4
       - name: Install dependencies
-        run: pdm install && pip install ruff
+        run: pdm install
       - name: Lint with ruff
-        run: | 
-          ls
+        run: |
           ruff check .
-          ruff fix .
