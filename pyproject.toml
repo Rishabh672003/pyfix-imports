@@ -1,6 +1,6 @@
 [project]
 name = "pyfix-imports"
-version = "0.4.2"
+version = "0.5.0"
 description = "python tool that will fix your missing imports"
 authors = [{ name = "Rishabh", email = "jharishabh672003@gmail.com" }]
 dependencies = [
