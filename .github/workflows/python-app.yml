@@ -24,7 +24,7 @@ jobs:
         run: pdm install
       - name: Lint with ruff
         run: |
-          ruff check .
+          pdm run ruff check .
       - name: Test with pytest
         run: |
           pdm run pytest
