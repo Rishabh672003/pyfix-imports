@@ -9,7 +9,7 @@ dependencies = [
     "importlib>=1.0.4",
     "xdg-base-dirs>=6.0.1",
 ]
-requires-python = ">=3.12"
+requires-python = ">=3.10"
 readme = "README.md"
 license = { text = "GPL-3.0-only" }
 
