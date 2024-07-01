@@ -21,9 +21,12 @@ build-backend = "pdm.backend"
 distribution = true
 
 [tool.pdm.dev-dependencies]
-lint = [
-    "ruff>=0.5.0",
-]
+lint = ["ruff>=0.5.0"]
+tests = ["pytest>=8.2.2"]
 
 [project.scripts]
 pyfix-imports = "pyfix_imports.commandline.cli:cli"
+
+[tool.pytest.ini_options]
+# addopts = "--cov=pyfix_imports"
+# testpaths = ["tests"]

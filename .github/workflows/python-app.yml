@@ -13,15 +13,26 @@ permissions:
   contents: read
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  Testing:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        python-version: [3.8, 3.9,"3.10", "3.11", "3.12"]
+        os: [ubuntu-latest, macOS-latest, windows-latest]
 
     steps:
       - uses: actions/checkout@v4
-      - name: Setup PDM
+      - name: Set up PDM
         uses: pdm-project/setup-pdm@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
       - name: Install dependencies
-        run: pdm install && pip install ruff
+        run: |
+          pdm sync -d -G tests lint; pip install ruff
+      - name: Run Tests
+        run: |
+          pdm run -v pytest tests
       - name: Lint with ruff
         run: |
           ruff check .
