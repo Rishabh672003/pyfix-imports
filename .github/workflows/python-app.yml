@@ -32,7 +32,7 @@ jobs:
           pdm install ; pip install ruff pytest
       - name: Run Tests
         run: |
-          pdm run -v pytest tests
+          pdm run -v pytest
       - name: Lint with ruff
         run: |
           ruff check .
