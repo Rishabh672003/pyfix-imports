@@ -26,7 +26,3 @@ tests = ["pytest>=8.2.2"]
 
 [project.scripts]
 pyfix-imports = "pyfix_imports.commandline.cli:cli"
-
-[tool.pytest.ini_options]
-# addopts = "--cov=pyfix_imports"
-# testpaths = ["tests"]
