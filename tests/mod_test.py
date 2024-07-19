@@ -19,6 +19,7 @@ def test_code_output():
         "List",
         "mp",
         "Optional",
+        "accumulate",
         "time",
         "np",
         "deque",
