@@ -9,6 +9,13 @@ def get_modules_all(mod_name: str) -> FrozenSet[str]:
     return frozenset(__all__)
 
 
+def get_methods_all(mod_name: str) -> FrozenSet[str]:
+    classes = __import__(mod_name)
+    return frozenset(
+        [attr for attr in dir(classes) if callable(getattr(classes, attr))]
+    )
+
+
 def is_package(name: str) -> bool:
     return importlib.util.find_spec(name) is not None
 
@@ -19,12 +26,14 @@ def import_string(mod_set) -> str:
         "typing": get_modules_all("typing"),
         "collections": get_modules_all("collections"),
         "textwrap": get_modules_all("textwrap"),
+        "itertools": get_methods_all("itertools"),
     }
     imports_dict = {
         "predefined": [],
         "typing": [],
         "collections": [],
         "textwrap": [],
+        "itertools": [],
         "others": [],
     }
 
