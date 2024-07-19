@@ -25,7 +25,7 @@ def cli(filename: str, fix: bool, config_file: Path | None) -> str | None:
     fixed_code = fix_code(filename, config_file)
 
     if not fix:
-        click.echo(fixed_code, nl=True)
+        click.echo(fixed_code.lstrip(), nl=True)
     else:
         write_to_file(filename, fixed_code)
         click.echo("Written to file successfully")
