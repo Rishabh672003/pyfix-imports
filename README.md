@@ -11,10 +11,19 @@ Just run `pip install pyfix-imports`
 
 ## Usage
 
-Just running `pyfix-imports <FILENAME>` will just print the fixed code to the stdout.
-If you want to update the file in-place use the -f/--fix option `pyfix-imports -c <FILENAME>`
+```sh
+pyfix-imports <FILEPATH> # returns the fixed code to the stdout
+```
 
-I recommend after running the program use [isort](https://pycqa.github.io/isort/) to sort the imports.
+```sh
+pyfix-imports -f <FILEPATH> # Writes the fixed code to the file
+```
+
+```sh
+pyfix-imports -c <CONFIGPATH> <FILEPATH> # uses the config file
+```
+
+I recommend after running the program use [isort](https://pycqa.github.io/isort/) or [ruff](https://github.com/astral-sh/ruff) to sort the imports.
 
 ## Configuration
 
@@ -38,14 +47,15 @@ with [conform.nvim](https://github.com/stevearc/conform.nvim) you can also use i
 ```lua
 require("conform").setup({
     formatters_by_ft = {
-    python = { "pyfix_imports", "ruff", "isort" },
+    python = { "pyfix_imports", "ruff_fix", "ruff_organize_imports", "ruff_format", },
     formatters = {
         pyfix_imports = {
             command = "pyfix-imports",
             args = { "$FILENAME" },
             cwd = require("conform.util").root_file({ "requirements.txt", "pyproject.toml" }),
         },
-    })
+    }
+})
 ```
 
 ## References
