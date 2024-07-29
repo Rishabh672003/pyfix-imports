@@ -1,14 +1,11 @@
 def get_file_text(filename: str) -> str:
-    output = ""
     try:
         with open(filename, "r") as file:
-            for i in file:
-                output += i
-
+            output = file.read()
     except Exception as e:
         print(e)
 
-    return output.lstrip().rstrip()
+    return output
 
 
 def write_to_file(filename: str, text: str):
