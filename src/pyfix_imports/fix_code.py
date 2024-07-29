@@ -20,6 +20,6 @@ def fix_code(filename: str, config_file=None) -> str:
 
     if mod_list:
         imports = import_string(mod_list)
-        return imports + 2 * "\n" + output
+        return imports + "\n" + output
     else:
         return output
