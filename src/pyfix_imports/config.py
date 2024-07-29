@@ -29,13 +29,6 @@ def config_parse(file: Path) -> Dict[str, str] | Dict:
         return {}
 
 
-def update_pred_imports(data: Dict[str, str]) -> None:
-    if data:
-        return predefined_imports.update(data)
-    else:
-        return None
-
-
 def config(given_path: Path | None) -> None:
     path = given_path or get_config_path()
 
@@ -43,4 +36,6 @@ def config(given_path: Path | None) -> None:
         if os.path.exists(path):
             data = config_parse(path)
             if data:
-                update_pred_imports(data)
+                return predefined_imports.update(data)
+            else:
+                return None
