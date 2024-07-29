@@ -21,9 +21,8 @@ def config_parse(file: Path) -> Dict[str, str] | Dict:
     try:
         with open(file, "rb") as f:
             data = tomllib.load(f)
-        req_data = data["config"]
-        if req_data:
-            return req_data
+        if data["config"]:
+            return data["config"]
         else:
             return {}
     except Exception:
