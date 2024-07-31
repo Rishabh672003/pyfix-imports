@@ -1,7 +1,5 @@
 import importlib.util
-from typing import FrozenSet
-
-from pyfix_imports.predefined import predefined_imports
+from typing import Dict, FrozenSet, Set
 
 
 def get_modules_all(mod_name: str) -> FrozenSet[str]:
@@ -20,9 +18,9 @@ def is_package(name: str) -> bool:
     return importlib.util.find_spec(name) is not None
 
 
-def import_string(mod_set) -> str:
+def import_string(mod_set: Set[str], pred_imports: Dict[str, str]) -> str:
     modules_all = {
-        "predefined": predefined_imports,
+        "predefined": pred_imports,
         "typing": get_modules_all("typing"),
         "collections": get_modules_all("collections"),
         "textwrap": get_modules_all("textwrap"),
@@ -50,7 +48,7 @@ def import_string(mod_set) -> str:
     import_statements = []
     for module_type, modules in imports_dict.items():
         if module_type == "predefined" and modules:
-            import_statements.extend(predefined_imports[mod] for mod in modules)
+            import_statements.extend(pred_imports[mod] for mod in modules)
         elif module_type == "others" and modules:
             import_statements.extend(f"import {mod}" for mod in modules)
         elif modules:
