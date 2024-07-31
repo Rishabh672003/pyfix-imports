@@ -1,4 +1,5 @@
 from pyfix_imports.package import import_string
+from pyfix_imports.predefined import predefined_imports
 from pyfix_imports.pyflake import pyflake
 
 from tests.test import test_code
@@ -6,7 +7,7 @@ from tests.test import test_code
 
 def imp_string(src):
     mod_list = pyflake(src)
-    imports = set(import_string(mod_list))
+    imports = set(import_string(mod_list, predefined_imports))
 
     return imports
 
