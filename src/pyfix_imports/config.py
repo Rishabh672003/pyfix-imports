@@ -30,7 +30,7 @@ def config_parse(file: Path) -> Dict[str, str] | Dict:
 
 def config_dict(user_path: Path | None) -> Dict[str, str]:
     path = user_path or get_xdg_config_path()
-    imports_dict = predefined_imports.copy()
+    imports_dict = predefined_imports
 
     if path:
         if os.path.exists(path):
