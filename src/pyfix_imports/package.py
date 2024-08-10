@@ -54,4 +54,4 @@ def import_string(mod_set: Set[str], pred_imports: Dict[str, str]) -> str:
         elif modules:
             import_statements.append(f"from {module_type} import {', '.join(modules)}")
 
-    return "\n".join(import_statements)
+    return "\n".join(import_statements).strip()
