@@ -1,4 +1,5 @@
 import os
+import sys
 from pathlib import Path
 from typing import Dict
 
@@ -21,10 +22,13 @@ def config_parse(file: Path) -> Dict[str, str] | Dict:
     try:
         with open(file, "rb") as f:
             data = tomllib.load(f)
-        if data["config"]:
-            return data["config"]
-        return {}
-    except Exception:
+            return data["config"] if data["config"] else {}
+    except Exception as e:
+        print(
+            f"""\nAn exception occured while parsing the config, config file wasnt used to fix the imports.
+Exception: {e}\n""",
+            file=sys.stderr,
+        )
         return {}
 
 
@@ -32,9 +36,8 @@ def config_dict(user_path: Path | None) -> Dict[str, str]:
     path = user_path or get_xdg_config_path()
     imports_dict = predefined_imports
 
-    if path:
-        if os.path.exists(path):
-            data = config_parse(path)
-            if data:
-                imports_dict.update(data)
+    if path is not None and os.path.exists(path):
+        data = config_parse(path)
+        if data:
+            imports_dict.update(data)
     return imports_dict
