@@ -1,9 +1,11 @@
+import sys
 from pathlib import Path
 
 import click
 
 from pyfix_imports.file import write_to_file
 from pyfix_imports.fix_code import fix_code
+
 
 @click.command()
 @click.option(
@@ -21,7 +23,7 @@ def cli(filename: str, fix: bool, config_file: Path | None) -> None:
     fixed_code: str = fix_code(filename, config_file)
 
     if not fix:
-        click.echo(fixed_code.lstrip(), nl=True)
+        click.echo(fixed_code, nl=True, file=sys.stdout)
     else:
         write_to_file(filename, fixed_code)
         click.echo("Written to file successfully")
