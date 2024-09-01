@@ -1,9 +1,9 @@
 import importlib.util
-from typing import Dict, FrozenSet, Set
+from typing import FrozenSet
 
 
 def get_modules_all(mod_name: str) -> FrozenSet[str]:
-    __all__ = getattr(__import__(mod_name), "__all__")
+    __all__ = importlib.import_module(mod_name).__all__
     return frozenset(__all__)
 
 
@@ -18,7 +18,7 @@ def is_package(name: str) -> bool:
     return importlib.util.find_spec(name) is not None
 
 
-def import_string(mod_set: Set[str], pred_imports: Dict[str, str]) -> str:
+def import_string(mod_set: set[str], pred_imports: dict[str, str]) -> str:
     modules_all = {
         "predefined": pred_imports,
         "typing": get_modules_all("typing"),

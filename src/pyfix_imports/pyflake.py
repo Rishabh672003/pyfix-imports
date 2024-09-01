@@ -1,5 +1,5 @@
 import re
-from typing import Any, Iterable, Set
+from typing import Any, Iterable
 
 import pyflakes.api
 import pyflakes.messages
@@ -41,7 +41,7 @@ def check(source: str) -> Iterable[pyflakes.messages.Message]:
 
 def undefined_name(
     messages: Iterable[pyflakes.messages.Message],
-) -> Set[str]:
+) -> set[str]:
     """Return undefined names."""
     pattern = re.compile(r"\'(.+?)\'")
     module_set = set()
@@ -54,7 +54,7 @@ def undefined_name(
     return module_set
 
 
-def pyflake(src: str) -> Set[str]:
+def pyflake(src: str) -> set[str]:
     """Takes the filename as an argument and Returns the set of all undefined names"""
     flake_message = check(src)
     modules = undefined_name(flake_message)

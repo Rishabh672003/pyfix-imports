@@ -1,5 +1,4 @@
 from pathlib import Path
-from typing import Dict, Set
 
 from pyfix_imports.config import config_dict
 from pyfix_imports.file import get_file_text
@@ -19,8 +18,8 @@ def fix_code(filename: str, config_file: Path | None = None) -> str:
     """
 
     file_content: str = get_file_text(filename)
-    mod_list: Set[str] = pyflake(file_content)
-    import_dict: Dict[str, str] = config_dict(config_file)
+    mod_list: set[str] = pyflake(file_content)
+    import_dict: dict[str, str] = config_dict(config_file)
 
     if mod_list:
         imports: str = import_string(mod_list, import_dict)

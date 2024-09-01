@@ -1,7 +1,6 @@
 import os
 import sys
 from pathlib import Path
-from typing import Dict
 
 import tomllib
 import xdg_base_dirs
@@ -18,7 +17,7 @@ def get_xdg_config_path() -> Path | None:
         return None
 
 
-def config_parse(file: Path) -> Dict[str, str] | Dict:
+def config_parse(file: Path) -> dict[str, str] | dict:
     try:
         with open(file, "rb") as f:
             data = tomllib.load(f)
@@ -32,12 +31,13 @@ Exception: {e}\n""",
         return {}
 
 
-def config_dict(user_path: Path | None) -> Dict[str, str]:
-    path = user_path or get_xdg_config_path()
+def config_dict(user_path: Path | None) -> dict[str, str]:
+    config_path = user_path or get_xdg_config_path()
     imports_dict = predefined_imports
 
-    if path is not None and os.path.exists(path):
-        data = config_parse(path)
+    # config_path being None means user didnt pass a config file as an argument
+    if config_path is not None and os.path.exists(config_path):
+        data = config_parse(config_path)
         if data:
             imports_dict.update(data)
     return imports_dict
