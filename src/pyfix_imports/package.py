@@ -1,13 +1,12 @@
 import importlib.util
-from typing import FrozenSet
 
 
-def get_modules_all(mod_name: str) -> FrozenSet[str]:
+def get_modules_all(mod_name: str) -> frozenset[str]:
     __all__ = importlib.import_module(mod_name).__all__
     return frozenset(__all__)
 
 
-def get_methods_all(mod_name: str) -> FrozenSet[str]:
+def get_methods_all(mod_name: str) -> frozenset[str]:
     classes = __import__(mod_name)
     return frozenset(
         [attr for attr in dir(classes) if callable(getattr(classes, attr))]
