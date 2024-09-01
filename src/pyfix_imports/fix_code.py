@@ -6,7 +6,7 @@ from pyfix_imports.package import import_string
 from pyfix_imports.pyflake import pyflake
 
 
-def fix_code(filename: str, config_file: Path | None = None) -> str:
+def fix_code(filename: str, config_file_path: Path | None = None) -> str:
     """ Fix the python source code of a file.
 
     Args:
@@ -19,7 +19,7 @@ def fix_code(filename: str, config_file: Path | None = None) -> str:
 
     file_content: str = get_file_text(filename)
     mod_list: set[str] = pyflake(file_content)
-    import_dict: dict[str, str] = config_dict(config_file)
+    import_dict: dict[str, str] = config_dict(config_file_path)
 
     if mod_list:
         imports: str = import_string(mod_list, import_dict)
